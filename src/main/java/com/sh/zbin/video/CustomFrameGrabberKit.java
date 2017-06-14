@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.opencv_core.Mat;
+import org.bytedeco.javacpp.opencv_core.Size;
+import org.bytedeco.javacpp.opencv_imgproc;
 
 import static org.bytedeco.javacpp.opencv_imgcodecs.*;
 import org.bytedeco.javacpp.opencv_videoio;
@@ -14,6 +16,7 @@ import org.bytedeco.javacv.Frame;
 import org.bytedeco.javacv.FrameGrabber;
 import org.bytedeco.javacv.FrameGrabber.Exception;
 import org.bytedeco.javacv.OpenCVFrameConverter;
+import org.bytedeco.javacv.*;
 
 public class CustomFrameGrabberKit {
 
@@ -106,6 +109,7 @@ public class CustomFrameGrabberKit {
 		grabber.start();
 		System.out.println("FPS : " + (int)grabber.getFrameRate());
 		Frame grabbedFrame;
+		Float scale = 0.5f;
 		int secCnt = 1;
 		int imgCount = 1;
 		List<String> imgPaths = new ArrayList<String>();
@@ -113,6 +117,14 @@ public class CustomFrameGrabberKit {
 			if (grabbedFrame.keyFrame && grabbedFrame.image != null) {
 				if ((secCnt - 1) % this.interval == 0 ) {
 					Mat pano = converterToMat.convert(grabbedFrame);
+//					Mat resizePano = new Mat();
+//					Mat resizeGrayPano = new Mat();
+//					¸ÄÏñËØ
+//					Size sz = new Size((int) (pano.size().width()/2), (int)(pano.size().height()/2));
+//					opencv_imgproc.resize(pano, resizePano, sz);
+//					¸ÄºÚ°×
+//					opencv_imgproc.cvtColor(resizePano, resizeGrayPano, opencv_imgproc.COLOR_RGB2GRAY);
+					System.out.println("cut_img/img" + imgCount + ".jpg");
 					imwrite("cut_img/img" + imgCount + ".jpg", pano);
 					imgPaths.add("cut_img\\img" + imgCount + ".jpg");
 					imgCount ++;

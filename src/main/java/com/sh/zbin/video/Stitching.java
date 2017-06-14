@@ -113,6 +113,8 @@ public class Stitching {
 
         System.out.println("Images stitched together to make " + this.result_name);
     	System.out.println("Stitching run end : " + new Date());
+    	
+    	stitcher = null;
 	}
 	
 //    static void printUsage() {
